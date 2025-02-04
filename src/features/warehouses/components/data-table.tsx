@@ -21,6 +21,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "../../../components/Pagination";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import AddForm from "./AddForm";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -55,23 +58,28 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center gap-3 py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <div className="flex items-center space-x-2">
-          <Checkbox id="distrebution" />
-          <label
-            htmlFor="distrebution"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >  
-            Show distrebutaion points only
-          </label>
+      <div className="flex items-center justify-between gap-3 py-4">
+        <div className="flex items-center w-full gap-2">
+          <Input
+            placeholder="Filter emails..."
+            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("email")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <div className="flex items-center space-x-2 w-full">
+            <Checkbox id="distrebution" />
+            <label
+              htmlFor="distrebution"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Show distrebutaion points only
+            </label>
+          </div>
+        </div>
+        <div className="">
+          <AddForm />
         </div>
       </div>
       <div className="rounded-md border mb-3">

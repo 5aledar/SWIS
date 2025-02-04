@@ -16,6 +16,7 @@ import Users from "./pages/Users";
 import Branches from "./pages/Branches";
 import Items from "./pages/Items";
 import Transactions from "./pages/Transactions";
+import toast, { Toaster } from 'react-hot-toast';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,11 +71,7 @@ const router = createBrowserRouter([
     element: <CompleteProfile />
   }
 ]);
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -83,6 +80,7 @@ createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
         <SidebarProvider>
           <RouterProvider router={router} />
+          <Toaster />
         </SidebarProvider>
       </QueryClientProvider>
     </ThemeProvider>
