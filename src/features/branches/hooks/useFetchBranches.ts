@@ -16,26 +16,26 @@ interface BranchResponse {
   status_code: number;
 }
 
-const fetchBranches = async () => {
+const fetchBranches = async (page = 1) => {
   const token = localStorage.getItem("token");
-  const { data } = await axiosInstance.get<BranchResponse>("/branches", {
+  const { data } = await axiosInstance.get<BranchResponse>(`/branches?page=${page}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-  return data.data;
+  return data;
 };
 
-export const useFetchBranches = () => {
-  const { data, isLoading } = useQuery<Branch[]>({
-    queryKey: ["branches"],
-    queryFn: fetchBranches,
+export const useFetchBranches = (page: number) => {
+  const { data, isLoading } = useQuery<BranchResponse>({
+    queryKey: ["branches", page], // Include page number in queryKey to refetch when it changes
+    queryFn: () => fetchBranches(page),
   });
 
-
   return {
-    data,
-    isLoading
-  }
+    data: data?.data,
+    meta: data?.meta,
+    isLoading,
+  };
 };

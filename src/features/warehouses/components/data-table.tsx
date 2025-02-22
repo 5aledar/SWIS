@@ -21,8 +21,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "../../../components/Pagination";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import AddForm from "./AddForm";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -133,7 +131,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <DataTablePagination table={table} />
+      {/* <DataTablePagination table={table} /> */}
     </div>
   );
 }
